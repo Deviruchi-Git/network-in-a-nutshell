@@ -1,5 +1,5 @@
 ---
-title: Spaniing Tree ชื่อนี้ปวดหัวตลอดเลย
+title: Spanninng Tree ชื่อนี้ปวดหัวตลอดเลย
 slug: sick-of-spanning-tree
 date: 2026-08-15
 draft: false
