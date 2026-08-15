@@ -10,6 +10,7 @@ slug: vxlan-evpn
 categories:
   - Data Center
 draft: false
+cover: /images/scr-20260815-qcfg.png
 ---
 ตอนแรกที่อ่านเรื่อง VXLAN ผมพยายามจำว่ามันคือ *"MAC-in-UDP encapsulation ที่มี VNI ขนาด 24 bit"* ซึ่งจำได้ แต่ไม่เข้าใจ จนกลับไปตั้งคำถามใหม่ว่า **มันเกิดมาเพื่อแก้ปัญหาอะไร** แล้วทุกอย่างถึงเข้าที่
 
