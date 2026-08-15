@@ -55,11 +55,21 @@ content:
         options:
           format: yyyy-MM-dd
 
+      - name: categories
+        label: หมวดหมู่
+        type: select
+        options:
+          multiple: true
+          max: 2
+          placeholder: เลือกหมวดหมู่
+          values: [Routing, Switching, Data Center, Security, Wireless, Automation, Notes]
+        description: หมวดหมู่ที่เลือกจะกลายเป็นการ์ดบนหน้าแรกอัตโนมัติ — เลือกได้ไม่เกิน 2
+
       - name: tags
         label: แท็ก
         type: string
         list: true
-        description: กดปุ่ม + เพื่อเพิ่มทีละอัน เช่น BGP, Routing
+        description: คำค้นละเอียดกว่าหมวดหมู่ กดปุ่ม + เพื่อเพิ่มทีละอัน เช่น BGP, OSPF
 
       - name: draft
         label: เก็บเป็นฉบับร่าง (ยังไม่เผยแพร่)
@@ -93,7 +103,8 @@ content:
         type: rich-text
 
   # ---------- หน้าแรก ----------
-  # หน้าแรกใช้ shortcode เยอะ แก้ผ่านโหมด Source จะปลอดภัยกว่า
+  # การ์ดหมวดหมู่และรายการบทความสร้างเองอัตโนมัติ ไม่ต้องมาแก้ที่นี่
+  # ตรงนี้แก้ได้แค่ชื่อเว็บกับคำโปรยด้านบนสุด
   - name: homepage
     label: หน้าแรก
     type: file
@@ -103,13 +114,13 @@ content:
       - name: title
         label: ชื่อเว็บ
         type: string
-      - name: layout
-        type: string
+      - name: toc
+        type: boolean
         hidden: true
       - name: body
-        label: เนื้อหาหน้าแรก
-        type: text
-        description: หน้านี้ใช้ shortcode ของธีม แก้เฉพาะข้อความ อย่าลบวงเล็บปีกกา
+        label: คำโปรยใต้ชื่อเว็บ
+        type: rich-text
+        description: ข้อความสั้นๆ 1-2 บรรทัด ส่วนที่เหลือของหน้าแรกสร้างเองอัตโนมัติ
 
 settings:
   content:
