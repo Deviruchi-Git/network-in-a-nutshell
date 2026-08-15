@@ -7,6 +7,7 @@ tags:
   - Switching
 categories:
   - Switching
+cover: /images/redundant-lan-without-stp.gif
 ---
 เมื่อเริ่มจับ network 1 ในชื่อแรกๆ ที่มักจะได้ยินเสมอคือ spanning tree เจ้าต้นใหม่ผู้แผ่กิ่งก้านสาขานี่แหละ ที่ในทางเนื้อหาฟังดูเหมือนจะง่าย แต่ถ้าพอเจอเวลามันมีปัญหา คือ 1 ใน ticket ที่น่าปวดหัวสุดๆ ของเหล่า network engineer 
 
