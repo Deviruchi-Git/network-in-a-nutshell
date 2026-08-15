@@ -10,7 +10,7 @@
     <h2 class="nn-card__title">
       <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
     </h2>
-    <p class="nn-card__excerpt">{{ partial "utils/page-description" $p }}</p>
+    <p class="nn-card__excerpt">{{ partial "utils/page-description" $p | plainify | truncate 180 }}</p>
     {{- with $p.Params.categories }}
       <div class="nn-card__cats">
         {{- range . }}
