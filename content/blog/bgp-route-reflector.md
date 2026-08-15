@@ -14,7 +14,8 @@ tags:
 
 เนื้อหา...
 
-mermaid
+
+```mermaid
 graph TD
     SW1["Switch-1"]
     SW2["Switch-2"]
@@ -33,3 +34,4 @@ graph TD
     SW3 --- SW4
     Host1 --- SW3
     Host2 --- SW4
+```
