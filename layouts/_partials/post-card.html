@@ -1,0 +1,27 @@
+{{- $p := . -}}
+<article class="nn-card{{ if not $p.Params.cover }} nn-card--noimg{{ end }}">
+  {{- with $p.Params.cover }}
+    <a class="nn-card__thumb" href="{{ $p.RelPermalink }}" tabindex="-1" aria-hidden="true">
+      <img src="{{ relURL (strings.TrimPrefix "/" .) }}" alt="" loading="lazy" decoding="async" />
+    </a>
+  {{- end }}
+  <div class="nn-card__body">
+    <div class="nn-card__date">{{ partial "utils/format-date" $p.Date }}</div>
+    <h2 class="nn-card__title">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+    </h2>
+    <p class="nn-card__excerpt">{{ partial "utils/page-description" $p }}</p>
+    {{- with $p.Params.categories }}
+      <div class="nn-card__cats">
+        {{- range . }}
+          {{- $cat := . }}
+          {{- with site.GetPage (printf "/categories/%s" (urlize $cat)) }}
+            <a class="nn-badge" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          {{- else }}
+            <span class="nn-badge">{{ $cat }}</span>
+          {{- end }}
+        {{- end }}
+      </div>
+    {{- end }}
+  </div>
+</article>
