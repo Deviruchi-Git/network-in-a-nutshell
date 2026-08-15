@@ -55,6 +55,11 @@ content:
         options:
           format: yyyy-MM-dd
 
+      - name: description
+        label: คำโปรย
+        type: text
+        description: 1-2 ประโยคที่จะโชว์ในหน้ารวมบทความ ถ้าเว้นว่างระบบจะตัดจากย่อหน้าแรกให้เอง
+        
       - name: cover
         label: รูปหน้าปก
         type: image
