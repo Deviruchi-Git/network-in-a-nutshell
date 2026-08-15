@@ -1,0 +1,27 @@
+{{/* หน้าแรกของเว็บ ------------------------------------------------------------------ ไฟล์นี้ทับ layout หน้าแรกของธีม Hextra (ธีมเดิมโชว์แค่ข้อความเฉยๆ) โครงสร้างที่ได้: 1. หัวข้อ + เนื้อหาจาก content/_index.md 2. การ์ดหมวดหมู่ — สร้างเองอัตโนมัติจากหมวดที่มีบทความจริง (หมวดไหนไม่มีบทความ การ์ดจะไม่โผล่ ไม่มีทางเป็นลิงก์ตาย) 3. รายการบทความล่าสุด — อัปเดตเองทุกครั้งที่เขียนใหม่ ส่วนที่ 2 และ 3 ลอกโครงมาจาก layouts/blog/list.html ของธีม */}} {{ define "main" }} {{- $readMore := (T "readMore") | default "อ่านต่อ →" -}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
+
+{{/* ---------- 1. หัวข้อ + คำโปรย ---------- */}} {{ if .Title }}
+{{ .Title }}
+{{ end }}
+{{ .Content }}
+{{/* ---------- 2. การ์ดหมวดหมู่ (อัตโนมัติ) ---------- */}} {{/* ใช้ .RelPermalink ตรงๆ ใน เอง ไม่เรียก partial การ์ดของธีม เพราะ partial นั้นจะเติม path เว็บซ้ำอีกรอบ ทำให้ลิงก์เพี้ยน */}} {{- with site.GetPage "/categories" }} {{- if .Pages }}
+{{- range .Pages }}
+{{ .LinkTitle }}
+{{ len .Pages }} บทความ
+{{- end }}
+{{- end }} {{- end }} {{/* ---------- 3. รายการบทความ ---------- */}} {{- $posts := where site.RegularPages "Section" "blog" }} {{- $posts = $posts.ByDate.Reverse }} {{- if $posts }}
+บทความล่าสุด
+{{- $pagerSize := site.Params.blog.list.pagerSize | default 10 }} {{- $paginator := .Paginate $posts $pagerSize }} {{- range $paginator.Pages }}
+{{ .Title }}
+{{ if site.Params.blog.list.displayTags }}
+{{ partial "tags.html" (dict "context" .) }}
+{{ end }}
+
+{{- partial "utils/page-description" . -}}
+
+{{- $readMore -}}
+
+{{ partial "utils/format-date" .Date }}
+{{- end }} {{- if gt $paginator.TotalPages 1 }} {{ partial "components/blog-pager.html" $paginator }} {{- end }} {{- end }}
+{{ end }} 
