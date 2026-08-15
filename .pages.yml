@@ -1,0 +1,121 @@
+# ==========================================================
+#  ตั้งค่าหน้าจอเขียนบทความ (Pages CMS)
+#  ไฟล์นี้บอก Pages CMS ว่าเว็บเรามีอะไรบ้าง และให้แสดงช่องกรอกแบบไหน
+#  แก้ label ต่างๆ ได้ตามใจ มันคือข้อความบนหน้าจอเฉยๆ
+# ==========================================================
+
+# ---------- รูปภาพ ----------
+# input  = เก็บไฟล์จริงไว้ที่ไหนใน repo
+# output = path ที่จะเขียนลงในบทความ (ธีม Hextra เติม path เว็บให้เองอัตโนมัติ
+#          เพราะฉะนั้นใช้ /images เฉยๆ ได้ ถึงเปลี่ยนชื่อ repo ก็ไม่พัง)
+media:
+  input: static/images
+  output: /images
+  categories: [image]
+  rename: safe          # เปลี่ยนชื่อไฟล์ให้ปลอดภัย เช่น "รูป 1.png" -> "rup-1.png"
+
+content:
+  # ---------- บทความ ----------
+  - name: blog
+    label: บทความ
+    type: collection
+    path: content/blog
+    format: yaml-frontmatter
+    exclude: [_index.md]        # ไม่ต้องแสดงหน้าปกหมวดในรายการ
+    filename:
+      template: "{fields.slug}.md"
+      field: create             # โชว์ช่องชื่อไฟล์ตอนสร้างใหม่ จะได้เห็นและแก้ได้
+    view:
+      fields: [title, date, tags]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: ชื่อบทความ
+        type: string
+        required: true
+        description: ภาษาไทยได้เต็มที่
+
+      - name: slug
+        label: ชื่อ URL (ภาษาอังกฤษ)
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9-]+$"
+          message: "ใช้ได้เฉพาะ a-z 0-9 และ - เท่านั้น เช่น bgp-route-reflector"
+        description: จะกลายเป็นที่อยู่ของบทความ เช่น bgp-route-reflector
+
+      - name: date
+        label: วันที่เผยแพร่
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: tags
+        label: แท็ก
+        type: string
+        list: true
+        description: กดปุ่ม + เพื่อเพิ่มทีละอัน เช่น BGP, Routing
+
+      - name: draft
+        label: เก็บเป็นฉบับร่าง (ยังไม่เผยแพร่)
+        type: boolean
+        default: false
+
+      - name: body
+        label: เนื้อหา
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true        # มีปุ่มสลับ Editor / Source เผื่ออยากดูโค้ดดิบ
+          media: true
+          rename: safe
+
+  # ---------- หน้าเกี่ยวกับ ----------
+  - name: about
+    label: หน้าเกี่ยวกับ
+    type: file
+    path: content/about.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: หัวข้อ
+        type: string
+      - name: type
+        type: string
+        hidden: true            # ค่าระบบ อย่าแก้
+      - name: body
+        label: เนื้อหา
+        type: rich-text
+
+  # ---------- หน้าแรก ----------
+  # หน้าแรกใช้ shortcode เยอะ แก้ผ่านโหมด Source จะปลอดภัยกว่า
+  - name: homepage
+    label: หน้าแรก
+    type: file
+    path: content/_index.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: ชื่อเว็บ
+        type: string
+      - name: layout
+        type: string
+        hidden: true
+      - name: body
+        label: เนื้อหาหน้าแรก
+        type: text
+        description: หน้านี้ใช้ shortcode ของธีม แก้เฉพาะข้อความ อย่าลบวงเล็บปีกกา
+
+settings:
+  content:
+    merge: true       # เก็บค่าใน front matter ที่ไม่ได้ประกาศไว้ข้างบน ไม่ให้หายตอนบันทึก
+  commit:
+    templates:
+      create: "เพิ่ม {filename}"
+      update: "แก้ไข {filename}"
+      delete: "ลบ {filename}"
