@@ -1,26 +1,31 @@
 ---
-title: "เข้าใจ VXLAN EVPN แบบไม่ต้องท่องจำ"
+title: เข้าใจ VXLAN EVPN แบบไม่ต้องท่องจำ
 date: 2026-08-15
 tags:
   - VXLAN
   - EVPN
   - Data Center
   - Overlay
+slug: vxlan-evpn
+categories:
+  - Data Center
+draft: false
 ---
-
 ตอนแรกที่อ่านเรื่อง VXLAN ผมพยายามจำว่ามันคือ *"MAC-in-UDP encapsulation ที่มี VNI ขนาด 24 bit"* ซึ่งจำได้ แต่ไม่เข้าใจ จนกลับไปตั้งคำถามใหม่ว่า **มันเกิดมาเพื่อแก้ปัญหาอะไร** แล้วทุกอย่างถึงเข้าที่
 
-<!--more-->
+
 
 ## ปัญหาที่ VLAN แบบเดิมแก้ไม่ได้
 
 ก่อนจะเข้าใจว่า VXLAN ดียังไง ต้องเห็นก่อนว่าของเดิมมันติดตรงไหน
 
+
 | ข้อจำกัด | ผลที่ตามมา |
-| --- | --- |
+| ---------------------------- | -------------------------------------------- |
 | VLAN ID มีแค่ 12 bit | ได้ 4,094 segment — ไม่พอสำหรับ multi-tenant |
 | Spanning Tree บล็อกลิงก์ทิ้ง | ซื้อ bandwidth มาแต่ใช้ได้ไม่หมด |
 | L2 domain ยืดไม่ถึง | ย้าย VM ข้าม rack ไม่ได้ |
+
 
 {{< callout type="info" >}}
 **แก่นของเรื่อง:** VXLAN ไม่ได้มาแทน VLAN แต่ **ห่อ L2 frame ไว้ใน UDP** แล้วส่งข้าม L3 network — ทำให้ underlay เป็น routed network ที่ใช้ได้ทุกลิงก์เต็มที่ ส่วน overlay ยังเห็นเป็น L2 เหมือนเดิม
@@ -99,3 +104,4 @@ EVPN = มีสมุดรายชื่อกลางที่ทุกค�
 
 - [RFC 7348 — Virtual eXtensible Local Area Network (VXLAN)](https://datatracker.ietf.org/doc/html/rfc7348)
 - [RFC 8365 — A Network Virtualization Overlay Solution Using EVPN](https://datatracker.ietf.org/doc/html/rfc8365)
+
