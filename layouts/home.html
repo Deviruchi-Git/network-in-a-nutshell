@@ -1,5 +1,4 @@
 {{ define "main" }}
-  {{- $readMore := (T "readMore") | default "อ่านต่อ →" -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
@@ -11,13 +10,11 @@
         <div class="content">{{ .Content }}</div>
         {{- with site.GetPage "/categories" }}
           {{- if .Pages }}
-            <div class="hextra-cards hx:mt-6 hx:gap-4 hx:grid not-prose" style="--hextra-cards-grid-cols: 3;">
+            <div class="nn-cats">
               {{- range .Pages }}
-                <a href="{{ .RelPermalink }}" class="hextra-card hx:group hx:flex hx:flex-col hx:justify-start hx:overflow-hidden hx:rounded-lg hx:border hx:border-gray-200 hx:text-current hx:no-underline hx:dark:shadow-none hx:hover:shadow-gray-100 hx:dark:hover:shadow-none hx:shadow-gray-100 hx:active:shadow-sm hx:active:shadow-gray-200 hx:transition-all hx:duration-200 hx:hover:border-gray-300 hx:bg-transparent hx:shadow-xs hx:dark:border-neutral-800 hx:hover:bg-slate-50 hx:hover:shadow-md hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-900">
-                  <div class="hx:mt-auto">
-                    <span class="hextra-card-icon hx:flex hx:font-semibold hx:items-start hx:gap-2 hx:pt-4 hx:px-4 hx:text-gray-700 hx:hover:text-gray-900 hx:dark:text-neutral-200 hx:dark:hover:text-neutral-50">{{ .LinkTitle }}</span>
-                    <div class="hextra-card-subtitle hx:text-sm hx:font-normal hx:text-gray-500 hx:dark:text-gray-400 hx:px-4 hx:mb-4 hx:mt-2">{{ len .Pages }} บทความ</div>
-                  </div>
+                <a class="nn-cat" href="{{ .RelPermalink }}">
+                  <span class="nn-cat__name">{{ .LinkTitle }}</span>
+                  <span class="nn-cat__count">{{ len .Pages }} บทความ</span>
                 </a>
               {{- end }}
             </div>
@@ -26,19 +23,10 @@
         {{- $posts := where site.RegularPages "Section" "blog" }}
         {{- $posts = $posts.ByDate.Reverse }}
         {{- if $posts }}
-          <div class="hx:mt-14 hx:mb-2 hx:text-xs hx:font-bold hx:uppercase hx:tracking-widest hx:text-gray-500 hx:dark:text-gray-400">บทความล่าสุด</div>
-          {{- $pagerSize := site.Params.blog.list.pagerSize | default 10 }}
-          {{- $paginator := .Paginate $posts $pagerSize }}
+          <div class="nn-section-label">บทความล่าสุด</div>
+          {{- $paginator := .Paginate $posts (site.Params.blog.list.pagerSize | default 10) }}
           {{- range $paginator.Pages }}
-            <div class="hx:mb-10">
-              <h3><a style="color: inherit; text-decoration: none;" class="hx:block hx:font-semibold hx:mt-8 hx:text-2xl" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-              {{ if site.Params.blog.list.displayTags }}
-                <div class="hx:text-sm hx:leading-7">{{ partial "tags.html" (dict "context" .) }}</div>
-              {{ end }}
-              <p class="hx:opacity-80 hx:mt-4 hx:leading-7">{{- partial "utils/page-description" . -}}</p>
-              <p class="hx:opacity-80 hx:mt-1 hx:leading-7"><a class="hx:text-[color:hsl(var(--primary-hue),100%,50%)] hx:underline hx:underline-offset-2 hx:decoration-from-font" href="{{ .RelPermalink }}">{{- $readMore -}}</a></p>
-              <p class="hx:opacity-50 hx:text-sm hx:mt-4 hx:leading-7">{{ partial "utils/format-date" .Date }}</p>
-            </div>
+            {{ partial "post-card.html" . }}
           {{- end }}
           {{- if gt $paginator.TotalPages 1 }}
             {{ partial "components/blog-pager.html" $paginator }}
