@@ -1,4 +1,4 @@
-module github.com/USERNAME/Network-in-a-Nutshell
+module github.com/deviruchi-git/network-in-a-nutshell
 
 go 1.26
 
