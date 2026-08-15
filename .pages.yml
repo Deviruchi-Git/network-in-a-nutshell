@@ -55,6 +55,14 @@ content:
         options:
           format: yyyy-MM-dd
 
+      - name: cover
+        label: รูปหน้าปก
+        type: image
+        options:
+          categories: [image]
+          rename: safe
+        description: รูปที่โชว์ข้างชื่อบทความในหน้ารวม จะถูกครอบเป็นสัดส่วน 16:9 — ไม่ใส่ก็ได้
+        
       - name: categories
         label: หมวดหมู่
         type: select
