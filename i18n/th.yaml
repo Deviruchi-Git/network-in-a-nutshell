@@ -1,0 +1,46 @@
+# คำแปลภาษาไทยของข้อความในธีม
+# ธีม Hextra ยังไม่มีไฟล์ภาษาไทยมาให้ ไฟล์นี้เลยเติมให้เอง
+# อยากเปลี่ยนคำไหน แก้ข้างขวาของ : ได้เลย
+
+# --- ข้อความสำหรับ screen reader ---
+closeBanner: "ปิดแบนเนอร์"
+menu: "เมนู"
+mermaidDiagram: "แผนภาพ"
+pdfViewer: "โปรแกรมอ่าน PDF"
+permalinkLabel: "ลิงก์ถาวรของหัวข้อนี้"
+playbackTime: "เวลาเล่น"
+searchResults: "ผลการค้นหา"
+skipToContent: "ข้ามไปยังเนื้อหา"
+tableOfContents: "สารบัญ"
+terminalRecording: "บันทึกหน้าจอ terminal"
+togglePageContextMenu: "เปิด/ปิดเมนูของหน้า"
+toggleSection: "เปิด/ปิดหัวข้อ"
+
+resultsFound: "พบ %d รายการ"
+
+# --- ข้อความที่ผู้อ่านเห็น ---
+archives: "คลังบทความ"
+backToTop: "กลับขึ้นบนสุด"
+changeLanguage: "เปลี่ยนภาษา"
+changeTheme: "เปลี่ยนธีม"
+copy: "คัดลอก"
+copied: "คัดลอกแล้ว!"
+copyAsMarkdown: "คัดลอกเป็น Markdown"
+copyPage: "คัดลอกทั้งหน้า"
+copyCode: "คัดลอกโค้ด"
+copyright: "© 2026 Network in a Nutshell"
+dark: "มืด"
+editThisPage: "แก้ไขหน้านี้บน GitHub →"
+lastUpdated: "แก้ไขล่าสุดเมื่อ"
+light: "สว่าง"
+next: "ถัดไป"
+noResultsFound: "ไม่พบผลลัพธ์"
+onThisPage: "หัวข้อในหน้านี้"
+more: "เพิ่มเติม"
+poweredBy: "สร้างด้วย Hextra"
+previous: "ก่อนหน้า"
+readMore: "อ่านต่อ →"
+searchPlaceholder: "ค้นหา..."
+system: "ตามระบบ"
+tags: "แท็ก"
+viewAsMarkdown: "ดูเป็น Markdown"
